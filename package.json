@@ -1,0 +1,25 @@
+{
+  "name": "rmdir-recursive",
+  "version": "0.0.0",
+  "description": "rmdir-recursive",
+  "main": "lib/rmdir-recursive.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LightSpeedWorks/rmdir-recursive.git"
+  },
+  "keywords": [
+    "rmdir"
+  ],
+  "author": "LightSpeedC",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LightSpeedWorks/rmdir-recursive/issues"
+  },
+  "homepage": "https://github.com/LightSpeedWorks/rmdir-recursive#readme",
+  "scripts": {
+    "test": "cd test && node rmdir-recursive-test"
+  }
+}
