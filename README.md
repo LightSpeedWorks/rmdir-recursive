@@ -50,7 +50,7 @@ co(function *() {
   } catch (err) {
     console.log(dir + ' cant removed with status ' + err);
   }
-})();
+}).then(function () {});
 ```
 
 ### async example

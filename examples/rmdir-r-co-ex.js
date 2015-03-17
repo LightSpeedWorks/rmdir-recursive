@@ -16,7 +16,7 @@ try { fs.mkdirSync('/tmp/deep'); } catch (err) { /* ignore */ }
 try { fs.mkdirSync('/tmp/deep/more'); } catch (err) { /* ignore */ }
 
 // co generator
-co(function *() {
+var p = co(function *() {
   var dir = '/tmp/deep';
   try {
     yield rmdirRecursive(dir);
@@ -24,4 +24,11 @@ co(function *() {
   } catch (err) {
     console.log(dir + ' cant removed with status ' + err);
   }
-})();
+});
+
+if (p && p.then && typeof p.then === 'function') p.then(function () {});
+else if (typeof p === 'function') p();
+else {
+  console.log(require('util').inspect(p, {colors: true, depth: null}));
+  throw new Error('what is the value returned from co: ' + typeof p);
+}
