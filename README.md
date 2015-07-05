@@ -1,16 +1,21 @@
-rmdir-recursive
+[rmdir-recursive](https://www.npmjs.com/package/rmdir-recursive) - npm
 ===============
 
   **rmdir-recursive** is a function like `rmdir -r`.
 
   This function is yieldable, thunkified, useful with co.
 
+
 Installation
 ------------
+
+[![NPM](https://nodei.co/npm/rmdir-recursive.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/rmdir-recursive/)
+[![NPM](https://nodei.co/npm-dl/rmdir-recursive.png?height=2)](https://nodei.co/npm/rmdir-recursive/)
 
 ```bash
 $ npm install rmdir-recursive
 ```
+
 
 Usage
 -----
@@ -30,6 +35,7 @@ var rmdirRecursive = require('rmdir-recursive');
 ### `rmdirRecursive.sync` or `rmdirRecursive.rmdirRecursiveSync`
 
 #### **dir** - directory path name
+
 
 Examples
 --------
@@ -84,6 +90,7 @@ try {
   console.log(dir + ' cant removed with status ' + err);
 }
 ```
+
 
 License
 -------
