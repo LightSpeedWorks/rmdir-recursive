@@ -6,31 +6,22 @@ try {
 } catch (err) {
   var rmdirRecursive = require('rmdir-recursive');
 }
-var fs = require('fs');
+const fs = require('fs');
 
 try { fs.mkdirSync('/tmp'); } catch (err) { err.code !== 'EEXIST' && console.error('ignore: ' + err); }
 try { fs.mkdirSync('/tmp/deep'); } catch (err) { console.error('ignore: ' + err); }
 try { fs.mkdirSync('/tmp/deep/more'); } catch (err) { console.error('ignore: ' + err); }
 
-var dir = '/tmp/deep';
-rmdirRecursive(dir, function (err) {
-  if (err) {
-    console.log(dir + ' cant removed with status ' + err);
-  } else {
+async function main() {
+  const dir = '/tmp/deep';
+
+  try {
+    await rmdirRecursive(dir);
     console.log(dir + ' removed');
-  }
-});
-rmdirRecursive(dir, function (err) {
-  if (err) {
+  } catch (err) {
     console.log(dir + ' cant removed with status ' + err);
-  } else {
-    console.log(dir + ' removed');
   }
-});
-rmdirRecursive(dir, function (err) {
-  if (err) {
-    console.log(dir + ' cant removed with status ' + err);
-  } else {
-    console.log(dir + ' removed');
-  }
-});
+}
+
+Promise.all([main(), main(), main()])
+.then(() => console.log('end'));

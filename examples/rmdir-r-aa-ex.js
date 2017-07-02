@@ -6,16 +6,16 @@ try {
 } catch (err) {
   var rmdirRecursive = require('rmdir-recursive');
 }
-var fs = require('fs');
-var aa = require('../aa');
+const fs = require('fs');
+const aa = require('../aa');
 
-try { fs.mkdirSync('/tmp'); } catch (err) { /* ignore */ }
-try { fs.mkdirSync('/tmp/deep'); } catch (err) { /* ignore */ }
-try { fs.mkdirSync('/tmp/deep/more'); } catch (err) { /* ignore */ }
+try { fs.mkdirSync('/tmp'); } catch (err) { err.code !== 'EEXIST' && console.error('ignore: ' + err); }
+try { fs.mkdirSync('/tmp/deep'); } catch (err) { console.error('ignore: ' + err); }
+try { fs.mkdirSync('/tmp/deep/more'); } catch (err) { console.error('ignore: ' + err); }
 
-// aa generator
+// aa with generator
 var p = aa(function *() {
-  var dir = '/tmp/deep';
+  const dir = '/tmp/deep';
   try {
     yield rmdirRecursive(dir);
     console.log(dir + ' removed');
@@ -24,7 +24,7 @@ var p = aa(function *() {
   }
 });
 
-if (p && p.then && typeof p.then === 'function') p.then(function () {});
+if (p && typeof p.then === 'function') p.then(function () {});
 else if (typeof p === 'function') p();
 else {
   console.log(require('util').inspect(p, {colors: true, depth: null}));

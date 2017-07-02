@@ -13,21 +13,21 @@ try { fs.mkdirSync('/tmp/deep'); } catch (err) { console.error('ignore: ' + err)
 try { fs.mkdirSync('/tmp/deep/more'); } catch (err) { console.error('ignore: ' + err); }
 
 var dir = '/tmp/deep';
-rmdirRecursive(dir, function (err) {
+rmdirRecursive(dir)(function (err) {
   if (err) {
     console.log(dir + ' cant removed with status ' + err);
   } else {
     console.log(dir + ' removed');
   }
 });
-rmdirRecursive(dir, function (err) {
+rmdirRecursive(dir)(function (err) {
   if (err) {
     console.log(dir + ' cant removed with status ' + err);
   } else {
     console.log(dir + ' removed');
   }
 });
-rmdirRecursive(dir, function (err) {
+rmdirRecursive(dir)(function (err) {
   if (err) {
     console.log(dir + ' cant removed with status ' + err);
   } else {

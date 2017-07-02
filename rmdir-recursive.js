@@ -4,7 +4,7 @@
 
 var fs = require('fs');
 var path = require('path');
-
+var aa = require('./aa');
 
 //######################################################################
 /**
@@ -20,66 +20,56 @@ function rmdirRecursive(dir, cb) {
   if (cb !== undefined && typeof cb !== 'function')
     throw new Error('rmdirRecursive: callback must be function');
 
-  var ctx = this, called, results;
+  return aa(function (cb) {
 
-  fs.exists(dir, function existsCallback(exists) {
+    fs.exists(dir, function existsCallback(exists) {
 
-    // already removed? then nothing to do
-    if (!exists) return rmdirRecursiveCallback(null);
+      // already removed? then nothing to do
+      if (!exists) return rmdirRecursiveCallback(null);
 
-    fs.stat(dir, function statCallback(err, stat) {
+      fs.stat(dir, function statCallback(err, stat) {
 
-      if (err) return rmdirRecursiveCallback(err);
+        if (err) return rmdirRecursiveCallback(err);
 
-      if (!stat.isDirectory())
-        return fs.unlink(dir, rmdirRecursiveCallback);
+        if (!stat.isDirectory())
+          return fs.unlink(dir, rmdirRecursiveCallback);
 
-      var files = fs.readdir(dir, readdirCallback);
+        var files = fs.readdir(dir, readdirCallback);
 
-    }); // fs.stat callback...
+      }); // fs.stat callback...
 
-    // fs.readdir callback...
-    function readdirCallback(err, files) {
+      // fs.readdir callback...
+      function readdirCallback(err, files) {
 
-      if (err) return rmdirRecursiveCallback(err);
+        if (err) return rmdirRecursiveCallback(err);
 
-      var n = files.length;
-      if (n === 0) return fs.rmdir(dir, rmdirRecursiveCallback);
+        var n = files.length;
+        if (n === 0) return fs.rmdir(dir, rmdirRecursiveCallback);
 
-      files.forEach(function (name) {
+        files.forEach(function (name) {
 
-        rmdirRecursive(path.resolve(dir, name), function (err) {
+          rmdirRecursive(path.resolve(dir, name), function (err) {
 
-          if (err) return rmdirRecursiveCallback(err);
+            if (err) return rmdirRecursiveCallback(err);
 
-          if (--n === 0)
-            return fs.rmdir(dir, rmdirRecursiveCallback);
+            if (--n === 0)
+              return fs.rmdir(dir, rmdirRecursiveCallback);
 
-        }); // rmdirRecursive
+          }); // rmdirRecursive
 
-      }); // files.forEach
+        }); // files.forEach
 
-    } // readdirCallback
+      } // readdirCallback
 
-  }); // fs.exists
+    }); // fs.exists
 
-  // rmdirRecursiveCallback(err)
-  function rmdirRecursiveCallback(err) {
-    if (err && err.code === 'ENOENT') err = arguments[0] = null;
+    // rmdirRecursiveCallback(err)
+    function rmdirRecursiveCallback(err) {
+      if (err && err.code === 'ENOENT') err = null;
+      cb(err);
+    } // rmdirRecursiveCallback
 
-    if (!results) results = arguments;
-    if (!cb || called) return;
-    called = true;
-    cb.apply(ctx, results);
-  } // rmdirRecursiveCallback
-
-  // return rmdirRecursiveYieldable
-  return function rmdirRecursiveYieldable(fn) {
-    if (!cb) cb = fn;
-    if (!results || called) return;
-    called = true;
-    cb.apply(ctx, results);
-  }; // rmdirRecursiveYieldable
+  }, cb);
 
 } // rmdirRecursive
 
@@ -127,7 +117,7 @@ function rmdirRecursiveSync(dir) {
 }
 
 
-exports = module.exports   = rmdirRecursive;
-exports.rmdirRecursive     = rmdirRecursive;
+exports = module.exports = rmdirRecursive;
+exports.rmdirRecursive = rmdirRecursive;
 exports.rmdirRecursiveSync = rmdirRecursiveSync;
-exports.sync               = rmdirRecursiveSync;
+exports.sync = rmdirRecursiveSync;

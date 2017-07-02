@@ -3,8 +3,7 @@
 
   **rmdir-recursive** is a function like `rmdir -r`.
 
-  This function is yieldable, thunkified, useful with co.
-
+  This function returns promise, async/await ready, also yieldable, thunkified, promisified, useful with `aa` or `co`.
 
 Installation
 ------------
@@ -16,7 +15,6 @@ Installation
 $ npm install rmdir-recursive
 ```
 
-
 Usage
 -----
 
@@ -24,32 +22,60 @@ Usage
 var rmdirRecursive = require('rmdir-recursive');
 ```
 
-### `rmdirRecursive`
+### `rmdirRecursive(dir, [callback])`
 
-#### **dir** - directory path name
++ **dir** - directory path name
++ **[callback]** - {optional} function callback(err)
++ **retuns** - promise, thunk for `aa` or `co`. returns undefined if callback is specified.
 
-#### **[callback]** - {optional} function callback(err)
+### `rmdirRecursive.sync(dir)` or `rmdirRecursive.rmdirRecursiveSync(dir)`
 
-#### **retuns** - thunk for `co`
-
-### `rmdirRecursive.sync` or `rmdirRecursive.rmdirRecursiveSync`
-
-#### **dir** - directory path name
-
++ **dir** - directory path name
 
 Examples
 --------
 
-### co example
+### async/await example
 
 ```js
 // require dependencies
-var co = require('co');
-var rmdirRecursive = require('rmdir-recursive');
+const rmdirRecursive = require('rmdir-recursive');
 
-// co generator
-co(function *() {
-  var dir = '/tmp/deep';
+async function main() {
+  const dir = '/tmp/deep';
+  try {
+    await rmdirRecursive(dir);
+    console.log(dir + ' removed');
+  } catch (err) {
+    console.log(dir + ' cant removed with status ' + err);
+  }
+}
+
+main();
+```
+
+### promise example
+
+```js
+// require dependencies
+const rmdirRecursive = require('rmdir-recursive');
+
+const dir = '/tmp/deep';
+rmdirRecursive(dir)
+.then(() => console.log(dir + ' removed'))
+.catch(err => console.log(dir + ' cant removed with status ' + err));
+```
+
+### aa with generator example
+
+```js
+// require dependencies
+const aa = require('aa');
+const rmdirRecursive = require('rmdir-recursive');
+
+// aa with generator
+aa(function *() {
+  const dir = '/tmp/deep';
   try {
     yield rmdirRecursive(dir);
     console.log(dir + ' removed');
@@ -75,7 +101,6 @@ rmdirRecursive(dir, function (err) {
 });
 ```
 
-
 ### sync example
 
 ```js
@@ -90,7 +115,6 @@ try {
   console.log(dir + ' cant removed with status ' + err);
 }
 ```
-
 
 License
 -------

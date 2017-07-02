@@ -1,17 +1,20 @@
 {
   "name": "rmdir-recursive",
-  "version": "0.0.1",
-  "description": "Recursively rmdir, like `rmdir -r` and yieldable/thunkified for `co`",
+  "version": "0.1.0",
+  "description": "Recursively rmdir, like `rmdir -r` and promise for async/await, yieldable/thunkified/promisified for `aa` or `co`",
   "main": "rmdir-recursive.js",
   "dependencies": {},
-  "devDependencies": {
-    "co": ">=4.4.0"
-  },
+  "devDependencies": {},
   "keywords": [
-    "rmdir", "co", "thunkify"
+    "aa",
+    "async",
+    "await",
+    "async-await",
+    "rmdir",
+    "co",
+    "thunkify"
   ],
   "directories": {
-    "lib": "lib",
     "example": "examples",
     "test": "test"
   },
