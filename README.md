@@ -3,7 +3,8 @@
 
   **rmdir-recursive** is a function like `rmdir -r`.
 
-  This function returns promise, async/await ready, also yieldable, thunkified, promisified, useful with `aa` or `co`.
+  This function returns promise, async/await ready,
+  also yieldable, thunkified, promisified, useful with `aa` or `co`.
 
 Installation
 ------------
@@ -66,7 +67,7 @@ rmdirRecursive(dir)
 .catch(err => console.log(dir + ' cant removed with status ' + err));
 ```
 
-### aa with generator example
+### async await with `aa` or `co` with generator example
 
 ```js
 // require dependencies
