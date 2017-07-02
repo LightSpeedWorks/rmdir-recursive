@@ -20,7 +20,7 @@ Usage
 -----
 
 ```js
-var rmdirRecursive = require('rmdir-recursive');
+const rmdirRecursive = require('rmdir-recursive');
 ```
 
 ### `rmdirRecursive(dir, [callback])`
@@ -67,7 +67,7 @@ rmdirRecursive(dir)
 .catch(err => console.log(dir + ' cant removed with status ' + err));
 ```
 
-### async await with `aa` or `co` with generator example
+### async await like `aa` or `co` with generator example
 
 ```js
 // require dependencies
