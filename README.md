@@ -85,7 +85,7 @@ aa(function *() {
 }).then(function () {});
 ```
 
-### async example
+### async callback example
 
 ```js
 // require dependencies
@@ -93,6 +93,22 @@ var rmdirRecursive = require('rmdir-recursive');
 
 var dir = '/tmp/deep';
 rmdirRecursive(dir, function (err) {
+  if (err) {
+    console.log(dir + ' cant removed with status ' + err);
+  } else {
+    console.log(dir + ' removed');
+  }
+});
+```
+
+### async thunk example
+
+```js
+// require dependencies
+var rmdirRecursive = require('rmdir-recursive');
+
+var dir = '/tmp/deep';
+rmdirRecursive(dir)(function (err) {
   if (err) {
     console.log(dir + ' cant removed with status ' + err);
   } else {
