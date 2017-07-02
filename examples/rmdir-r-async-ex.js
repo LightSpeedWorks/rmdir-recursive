@@ -1,13 +1,11 @@
-// require dependencies
-
 'use strict';
 
+// require dependencies
 try {
-  var rmdirRecursive = require('../lib/rmdir-recursive');
+  var rmdirRecursive = require('../rmdir-recursive');
 } catch (err) {
   var rmdirRecursive = require('rmdir-recursive');
 }
-
 var fs = require('fs');
 
 try { fs.mkdirSync('/tmp'); } catch (err) { /* ignore */ }

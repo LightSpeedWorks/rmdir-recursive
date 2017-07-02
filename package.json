@@ -2,7 +2,7 @@
   "name": "rmdir-recursive",
   "version": "0.0.1",
   "description": "Recursively rmdir, like `rmdir -r` and yieldable/thunkified for `co`",
-  "main": "lib/rmdir-recursive.js",
+  "main": "rmdir-recursive.js",
   "dependencies": {},
   "devDependencies": {
     "co": ">=4.4.0"

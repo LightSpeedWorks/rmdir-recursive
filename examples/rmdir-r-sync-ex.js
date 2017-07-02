@@ -3,11 +3,10 @@
 'use strict';
 
 try {
-  var rmdirRecursiveSync = require('../lib/rmdir-recursive').sync;
+  var rmdirRecursiveSync = require('../rmdir-recursive').sync;
 } catch (err) {
   var rmdirRecursiveSync = require('rmdir-recursive').sync;
 }
-
 var fs = require('fs');
 
 try { fs.mkdirSync('/tmp'); } catch (err) { /* ignore */ }

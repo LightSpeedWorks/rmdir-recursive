@@ -4,8 +4,8 @@
 
 var fs = require('fs');
 
-var rmdirRecursive = require('../lib/rmdir-recursive').rmdirRecursive;
-var rmdirRecursiveSync = require('../lib/rmdir-recursive').rmdirRecursiveSync;
+var rmdirRecursive = require('../rmdir-recursive').rmdirRecursive;
+var rmdirRecursiveSync = require('../rmdir-recursive').rmdirRecursiveSync;
 
 function callback(err) {
   if (err) console.log(err);
