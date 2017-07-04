@@ -7,7 +7,7 @@ try {
   var rmdirRecursive = require('rmdir-recursive');
 }
 const fs = require('fs');
-const aa = require('../aa');
+const aa = require('./aa-gtor');
 
 try { fs.mkdirSync('/tmp'); } catch (err) { err.code !== 'EEXIST' && console.error('ignore: ' + err); }
 try { fs.mkdirSync('/tmp/deep'); } catch (err) { console.error('ignore: ' + err); }
